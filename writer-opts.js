@@ -26,11 +26,18 @@ module.exports = Q.all([
 function getWriterOpts () {
   return {
     transform: (commit, context) => {
+
+      if (!context.originalVersion)
+        context.originalVersion = context.version;
+      const isPrerelease = semver.prerelease(context.originalVersion) !== null;
+
       // unity packages require a changelog without the -preview.X part, if X is not an exact match to what package.json has
       // (which it won't be, because X will be set by CI as a build id)
       context.version = `${semver.major(context.version)}.${semver.minor(context.version)}.${semver.patch(context.version)}`;
 
-      let discard = true
+      // if it's a prerelase, include all changes
+      // if it's not, discard everything except features, bugfixes, improvements and reverts
+      let discard = !isPrerelease;
       const issues = []
 
       commit.notes.forEach(note => {
@@ -79,6 +86,7 @@ function getWriterOpts () {
           // Issue URLs.
           commit.subject = commit.subject.replace(/#([0-9]+)/g, (_, issue) => {
             issues.push(issue)
+
             return `[#${issue}](${url}${issue})`
           })
         }

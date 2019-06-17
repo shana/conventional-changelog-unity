@@ -1,6 +1,6 @@
 {
   "name": "conventional-changelog-unity",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "conventional-changelog unity preset, based on the angular preset",
   "main": "index.js",
   "author": "Andreia Gaita",
