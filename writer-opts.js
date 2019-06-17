@@ -4,6 +4,7 @@ const compareFunc = require(`compare-func`)
 const Q = require(`q`)
 const readFile = Q.denodeify(require(`fs`).readFile)
 const resolve = require(`path`).resolve
+const semver = require('semver');
 
 module.exports = Q.all([
   readFile(resolve(__dirname, `./templates/template.hbs`), `utf-8`),
@@ -25,6 +26,10 @@ module.exports = Q.all([
 function getWriterOpts () {
   return {
     transform: (commit, context) => {
+      // unity packages require a changelog without the -preview.X part, if X is not an exact match to what package.json has
+      // (which it won't be, because X will be set by CI as a build id)
+      context.version = `${semver.major(context.version)}.${semver.minor(context.version)}.${semver.patch(context.version)}`;
+
       let discard = true
       const issues = []
 

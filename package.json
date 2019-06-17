@@ -1,28 +1,8 @@
 {
   "name": "conventional-changelog-unity",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "conventional-changelog unity preset, based on the angular preset",
   "main": "index.js",
-  "scripts": {
-    "test-windows": "mocha --timeout 30000"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/shana/conventional-changelog-unity.git"
-  },
-  "keywords": [
-    "conventional-changelog",
-    "unity",
-    "preset"
-  ],
-  "files": [
-    "conventional-changelog.js",
-    "conventional-recommended-bump.js",
-    "index.js",
-    "parser-opts.js",
-    "writer-opts.js",
-    "templates"
-  ],
   "author": "Andreia Gaita",
   "engines": {
     "node": ">=6.9.0"
@@ -32,8 +12,29 @@
     "url": "https://github.com/shana/conventional-changelog-unity/issues"
   },
   "homepage": "https://github.comshana/conventional-changelog-unity",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shana/conventional-changelog-unity.git"
+  },
+  "keywords": [
+    "conventional-changelog",
+    "unity",
+    "preset"
+  ],
+  "scripts": {
+    "test-windows": "mocha --timeout 30000"
+  },
   "dependencies": {
     "compare-func": "^1.3.1",
-    "q": "^1.5.1"
-  }
+    "q": "^1.5.1",
+    "semver": "^6.1.0"
+  },
+  "files": [
+    "conventional-changelog.js",
+    "conventional-recommended-bump.js",
+    "index.js",
+    "parser-opts.js",
+    "writer-opts.js",
+    "templates"
+  ]
 }
